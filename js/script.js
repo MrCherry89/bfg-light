@@ -118,21 +118,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
   
-document.querySelectorAll('.discuss-btn').forEach(btn => {
-  const effect = btn.querySelector('.hover-effect');
-  if (!effect) return; // ⛔ Пропустить, если .hover-effect не найден
+document.querySelectorAll('.discuss-btn2').forEach(button => {
+  button.addEventListener('mousemove', e => {
+    const rect = button.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 3;
+    const centerY = rect.top + rect.height / 3;
 
-  const updateEffectPosition = e => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    effect.style.left = `${x - 150}px`;
-    effect.style.top = `${y - 150}px`;
-  };
+    const offsetX = (e.clientX - centerX) / (rect.width / 3);  // от -1 до 1
+    const offsetY = (e.clientY - centerY) / (rect.height / 3);
 
-  btn.addEventListener('mouseenter', updateEffectPosition);
-  btn.addEventListener('mousemove', updateEffectPosition);
+    // Ограничим движение до 10px
+    const maxOffset = 10;
+    const translateX = offsetX * maxOffset;
+    const translateY = offsetY * maxOffset;
+
+    button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+  });
+
+  button.addEventListener('mouseleave', () => {
+    button.style.transform = 'translate(0, 0)';
+  });
 });
+
 
 document.querySelectorAll('.main-menu li a').forEach(link => {
   const text = link.textContent.trim();
@@ -177,7 +184,7 @@ gsap.registerPlugin(ScrollTrigger);
 const isMobile = window.innerWidth < 768; // или другой breakpoint
 
 gsap.to(".move-left", {
-  x: isMobile ? -40 : -100, // меньше на мобилках
+  x: isMobile ? -10 : -100, // меньше на мобилках
   ease: "none",
   scrollTrigger: {
     trigger: ".home-top-info",
@@ -209,6 +216,54 @@ gsap.to(".move-left-slow", {
   },
 });
 
+
+const btn = document.querySelector('.discuss-btn');
+let targetX = 0, targetY = 0;
+let currentX = 0, currentY = 0;
+let rafId;
+
+const animate = () => {
+  currentX += (targetX - currentX) * 0.1;
+  currentY += (targetY - currentY) * 0.1;
+
+  btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  rafId = requestAnimationFrame(animate);
+};
+
+btn.addEventListener('mouseenter', () => {
+  cancelAnimationFrame(rafId);
+  animate();
+});
+
+btn.addEventListener('mousemove', (e) => {
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width / 2;
+  const y = e.clientY - rect.top - rect.height / 2;
+
+  targetX = x * 0.1;
+  targetY = y * 0.1;
+});
+
+btn.addEventListener('mouseleave', () => {
+  targetX = 0;
+  targetY = 0;
+  cancelAnimationFrame(rafId);
+  animate();
+});
+
+const swiper = new Swiper('.techSwiper', {
+  speed: 1000,
+  slidesPerView: 'auto',
+  spaceBetween: "20px", // Убираем отступы между слайдами
+  navigation: {
+    nextEl: '.slider-btn.next',
+    prevEl: '.slider-btn.prev',
+  },
+});
+
+document.querySelector('.theme-btn').addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+});
 
 
 
