@@ -2766,9 +2766,6 @@ body.light-theme .header .header-info .menu-wrap .contact-us span,
 body.light-theme .header .header-info .menu-wrap .contact-us a {
   color: #0B0918;
 }
-body.light-theme .header .header-info .menu-wrap {
-  background: #FAFAFA;
-}
 body.light-theme .header .header-info .menu-wrap .contact-us,
 body.light-theme .header .header-info .menu-wrap .contact-us:before,
 body.light-theme .header .header-info .menu-wrap .contact-us:after {
@@ -2780,6 +2777,9 @@ body.light-theme .footer .contact-line {
   border-color: #FAFAFA;
 }
 @media (max-width: 1200px) {
+  body.light-theme .header .header-info .menu-wrap {
+    background: #FAFAFA;
+  }
   body.light-theme .our-cases {
     background: white;
   }

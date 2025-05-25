@@ -2309,9 +2309,7 @@ body.light-theme {
   .header .header-info .menu-wrap .contact-us a{
     color: #0B0918;
   }
-  .header .header-info .menu-wrap{
-    background: #FAFAFA;
-  }
+
   .header .header-info .menu-wrap .contact-us,
   .header .header-info .menu-wrap .contact-us:before,
   .header .header-info .menu-wrap .contact-us:after{
@@ -2323,6 +2321,9 @@ body.light-theme {
     border-color: #FAFAFA;
   }
   @media (max-width: 1200px) {
+    .header .header-info .menu-wrap{
+      background: #FAFAFA;
+    }
     .our-cases{
       background: white;
     }
