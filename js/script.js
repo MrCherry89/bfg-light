@@ -118,27 +118,125 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
   
-document.querySelectorAll('.discuss-btn2').forEach(button => {
-  button.addEventListener('mousemove', e => {
-    const rect = button.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 3;
-    const centerY = rect.top + rect.height / 3;
+// document.querySelectorAll('.discuss-btn2').forEach(button => {
+//   button.addEventListener('mousemove', e => {
+//     const rect = button.getBoundingClientRect();
+//     const centerX = rect.left + rect.width / 3;
+//     const centerY = rect.top + rect.height / 3;
 
-    const offsetX = (e.clientX - centerX) / (rect.width / 3);  // от -1 до 1
-    const offsetY = (e.clientY - centerY) / (rect.height / 3);
+//     const offsetX = (e.clientX - centerX) / (rect.width / 3);  // от -1 до 1
+//     const offsetY = (e.clientY - centerY) / (rect.height / 3);
 
-    // Ограничим движение до 10px
-    const maxOffset = 10;
-    const translateX = offsetX * maxOffset;
-    const translateY = offsetY * maxOffset;
+//     // Ограничим движение до 10px
+//     const maxOffset = 10;
+//     const translateX = offsetX * maxOffset;
+//     const translateY = offsetY * maxOffset;
 
-    button.style.transform = `translate(${translateX}px, ${translateY}px)`;
-  });
+//     button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+//   });
 
-  button.addEventListener('mouseleave', () => {
-    button.style.transform = 'translate(0, 0)';
-  });
-});
+//   button.addEventListener('mouseleave', () => {
+//     button.style.transform = 'translate(0, 0)';
+//   });
+// });
+
+/* Анимация заливки кнопок */
+const btn_circle = document.querySelectorAll('.btn-custom');
+if (btn_circle.length > 0) {
+    btn_circle.forEach(item => {
+        let bg = item.querySelector('.btn-custom__bg');
+
+        item.addEventListener('mouseenter', (e) => {
+            btn_circle_func(item, e);
+
+            if (bg) {
+                bg.classList.remove('desplode-circle');
+                bg.classList.add('explode-circle');
+            }
+        });
+
+        item.addEventListener('mouseleave', (e) => {
+            btn_circle_func(item, e);
+
+            if (bg) {
+                bg.classList.add('desplode-circle');
+                bg.classList.remove('explode-circle');
+            }
+        });
+    });
+
+    function btn_circle_func(item, e) {
+        let parentOffset = 0,
+            relX = e.pageX - parentOffset.left,
+            relY = e.pageY - parentOffset.top,
+            bg = item.querySelector('.btn-custom__bg');
+
+        if (bg) {
+            bg.style.left = relX + 'px';
+            bg.style.top = relY + 'px';
+        }
+    }
+}
+
+/* Магнитные кнопки */
+const magnets = document.querySelectorAll('[data-magnetic]');
+
+if (magnets.length > 0 && window.innerWidth > 1025) {
+    const magnetStrength = 80;           // Мощность магнита для блока
+    const magnetTextStrength = 40;       // Мощность магнита для текста
+    const animationDuration = 0.4;       // Быстрее: 0.4 секунды
+    const leaveDuration = 0.6;           // Анимация возврата
+    const easeIn = "power3.out";         // Плавный, но быстрый easing
+    const easeOut = "back.out(1.7)";     // Возврат с небольшим bounce
+
+    magnets.forEach((magnet) => {
+        magnet.addEventListener('mousemove', (event) => {
+            const rect = magnet.getBoundingClientRect();
+            const relX = ((event.clientX - rect.left) / magnet.offsetWidth - 0.5);
+            const relY = ((event.clientY - rect.top) / magnet.offsetHeight - 0.5);
+
+            gsap.to(magnet, {
+                duration: animationDuration,
+                x: relX * magnetStrength,
+                y: relY * magnetStrength,
+                rotate: 0.001,
+                ease: easeIn,
+            });
+
+            const text = magnet.querySelector('[data-magnetic-text]');
+            if (text) {
+                gsap.to(text, {
+                    duration: animationDuration,
+                    x: relX * magnetTextStrength,
+                    y: relY * magnetTextStrength,
+                    rotate: 0.001,
+                    ease: easeIn,
+                });
+            }
+        });
+
+        magnet.addEventListener('mouseleave', (event) => {
+            gsap.to(event.currentTarget, {
+                duration: leaveDuration,
+                x: 0,
+                y: 0,
+                ease: easeOut,
+            });
+
+            const text = magnet.querySelector('[data-magnetic-text]');
+            if (text) {
+                gsap.to(text, {
+                    duration: leaveDuration,
+                    x: 0,
+                    y: 0,
+                    ease: easeOut,
+                });
+            }
+        });
+    });
+}
+
+
 
 
 document.querySelectorAll('.main-menu li a').forEach(link => {
@@ -264,6 +362,7 @@ const swiper = new Swiper('.techSwiper', {
 document.querySelector('.theme-btn').addEventListener('click', () => {
   document.body.classList.toggle('light-theme');
 });
+
 
 
 

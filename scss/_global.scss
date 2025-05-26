@@ -204,65 +204,6 @@ a {
       margin: 20px 0;
      }
   }
-  .discuss-btn{
-    width: 100%;
-    margin-bottom: 50px;
-    padding: 68px 70px 72px;
-    border-radius: 50px;
-    text-align: center;
-    color: #0B0918;
-    font-size: 100px;
-    font-weight: normal;
-    border: 2px solid #0B0918;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    will-change: transform;
-    transition: .6s;
-    @media (max-width: 1600px) {
-      font-size: 5vw;
-     }
-     @media (max-width: 1024px) {
-      font-size: 6vw;
-      padding: 38px 50px 42px;
-      border-radius: 30px;
-     }
-     @media (max-width: 767px) {
-      border-radius: 10px;
-      font-size: 22px;
-      border-width: 1px;
-      padding: 15px;
-      margin-bottom: 10px;
-     }
-     &:hover{
-      background: #0B0918;
-      border-color: #9CFE00;
-      color: #9CFE00;
-      svg{
-        fill: #9CFE00;
-      }
-     }
-    svg{
-      position: absolute;
-      right: 70px;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: .6s;
-      fill: #0B0918;
-      @media (max-width: 1600px) {
-        width: 70px;
-        right: 50px;
-       }
-       @media (max-width: 1024px) {
-        width: 50px;
-       }
-       @media (max-width: 767px) {
-        width: 20px;
-        height: auto;
-        right: 20px;
-       }
-    }
-  }
   .contact-line{
     @include flex;
     @include justify-between;
@@ -359,11 +300,130 @@ a {
   }
 }
 
+.magnetic-button {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.3s ease;
+  z-index: 1;
+  @include flex;
+  @include align-center;
+  border: 2px solid #0B0918 !important;
+  width: 100%;
+  margin-bottom: 50px;
+  border-radius: 50px;
+  @media (max-width: 1024px) {
+    border-radius: 30px;
+   }
+   @media (max-width: 767px) {
+    border-radius: 10px;
+    margin-bottom: 20px;
+   }
+   svg{
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .6s;
+    fill: #0B0918;
+    @media (max-width: 1600px) {
+      width: 70px;
+      right: 50px;
+     }
+     @media (max-width: 1024px) {
+      width: 50px;
+     }
+     @media (max-width: 767px) {
+      width: 20px;
+      height: auto;
+      right: 20px;
+     }
+  }
+  &:after{
+    content: "";
+    width: 0;
+    height: 100%;
+    background: #0B0918;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: .5s;
+    z-index: -1;
+  }
+  &:hover{
+    border-color: #9CFE00;
+    color: #9CFE00;
+    &:after{
+      width: 100%;
+    }
+    svg{
+      fill: #9CFE00;
+    }
+  }
+}
+
+.magnetic-button .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #0B0918;
+  z-index: 0;
+  transition: width 0.4s ease;
+}
+
+
+.magnetic-button .text {
+  position: relative;
+  z-index: 1;
+  color:  #0B0918;
+  font-size: 100px;
+  font-style: normal;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-weight: 400;
+  line-height: 90%;
+  transition:  0.3s;
+  padding: 68px 70px 72px;
+  border-radius: 50px;
+  text-align: center;
+  color: #0B0918;
+  font-size: 100px;
+  font-weight: normal;
+  position: relative;
+  cursor: pointer;
+  @media (max-width: 1600px) {
+    font-size: 5vw;
+   }
+   @media (max-width: 1024px) {
+    font-size: 6vw;
+    padding: 38px 50px 42px;
+    border-radius: 30px;
+   }
+   @media (max-width: 767px) {
+    border-radius: 10px;
+    font-size: 22px;
+    border-width: 1px;
+    padding: 15px;
+   }
+  
+}
+
+.magnetic-button:hover .text {
+  color: #9CFE00;
+}
+
 .seo-block{
-  padding: 150px 0 50px;
+  padding: 100px 0 50px;
   background: rgba(255, 255, 255, 0.05);
   @media (max-width: 1200px) {
-    padding: 100px 0 50px;
+    padding: 80px 0 50px;
    }
    @media (max-width: 767px) {
     padding: 60px 0;
@@ -401,7 +461,7 @@ a {
         width: 100%;
         height: 100%;
         z-index: -1;
-        transition: .5s;
+        transition: .3s;
       }
       .top{
         @include flex;
@@ -409,9 +469,10 @@ a {
         @include justify-between;
         border-top: 4px solid #9CFE00;
         padding-top: 20px;
-        transition: .5s;
+        transition: .3s;
         @media (max-width: 1024px) {
           padding: 12px 15px 0;
+          border-width: 2px;
          }
          svg{
           @media (max-width: 1024px) {
@@ -442,7 +503,8 @@ a {
       }
       &:hover{
         .top{
-          padding: 15px;
+          padding-left: 15px;
+          padding-right: 15px;
           border-color: transparent;
         }
         &:after{
@@ -797,8 +859,11 @@ a {
   @media (max-width: 1200px) {
     padding: 100px 0;
    }
+  @media (max-width: 1024px) {
+    background: #0B0918;
+   }
   @media (max-width: 767px) {
-  padding: 60px 0;
+  padding: 20px 0 50px;
   }
   .wrapper{
     text-align: center;
@@ -859,6 +924,7 @@ a {
       padding-bottom: 60px;
       @media (max-width: 767px) {
         padding-bottom: 30px;
+        border-radius: 10px;
         }
       .img-wrap{
         background-size: cover;
@@ -869,11 +935,15 @@ a {
         transition: .5s;
         overflow: hidden;
         @media (max-width: 1920px) {
-          height: 40vw;
+          height: 30vw;
+         }
+        @media (max-width: 1600px) {
+          height: 28vw;
          }
          @media (max-width: 767px) {
           margin-bottom: 20px;
-          height: 65vw;
+          height: 56vw;
+          border-radius: 10px 10px 0 0;
           }
       }
       .name{
@@ -935,6 +1005,7 @@ a {
             @media (max-width: 767px) {
               padding-left: 10px;
               font-size: 14px;
+              max-width: 296px;
               }
       }
       .more{
@@ -1093,7 +1164,8 @@ a {
       padding: 20px 0 35px;
      }
     @media (max-width: 1024px) {
-      padding: 15px 0 22px;
+      padding: 15px 0;
+      margin: 10px 0;
      }
     h3{
       text-align: center;
@@ -1111,7 +1183,7 @@ a {
        }
       @media (max-width: 1024px) {
         letter-spacing: 0px;
-        font-size: 8vw;
+        font-size: 9.5vw;
        }
     }
   }
@@ -1233,6 +1305,8 @@ a {
           margin-top: 50px;
           max-width: 350px;
           width: 100%;
+          display: block;
+          margin: 50px auto 0;
           .button_su_inner{
             width: 100%;
           }
@@ -1333,6 +1407,7 @@ a {
     }
     .menu-wrap{
       flex-grow: 1;
+      margin-top: 3px;
       @media (max-width: 1200px) {
         position: absolute;
         top: 70px;
@@ -1365,6 +1440,8 @@ a {
           @include dir-col;
          }
         li{
+          @include flex;
+          @include align-center;
           @media (max-width: 1200px) {
             margin-bottom: 5px;
            }
@@ -1676,6 +1753,9 @@ a {
   @media(max-width: 1200px) {
     padding: 20px 0;
 }
+@media (max-width: 767px) {
+  overflow-y: auto;
+ }
   .breadcrumbs-menu{
     @include flex;
     li{
@@ -1716,6 +1796,10 @@ a {
         font-size: 18px;
         color: rgba(white, .5);
         @include flex;
+        white-space: nowrap;
+        @media (max-width: 1200px) {
+          font-size: 16px;
+         }
         @media (max-width: 767px) {
           font-size: 12px;
          }
@@ -2056,8 +2140,11 @@ a {
       &:hover{
         opacity: 1;
       }
+      svg{
+        fill: #9CFE00;
+      }
       &.prev{
-        img{
+        svg{
           transform: rotate(180deg);
         }
       }
@@ -2145,12 +2232,20 @@ a {
   z-index: 1;
 }
 
-
-
-
 body.light-theme {
   background-color: #fff;
   color: #0B0918;
+  .magnetic-button .text{
+    border-color: white;
+    color: white;
+  }
+  .magnetic-button svg{
+    fill: white;
+  }
+  .magnetic-button{
+    border-color: white !important;
+    border-width: 1px !important;
+  }
   .header .header-info .theme-wrap .theme-btn{
     border-color: #0B0918;
   }
@@ -2165,6 +2260,9 @@ body.light-theme {
   }
   .main-menu li a .letter.original{
     color: #0B0918;
+  }
+  .technologies .slider-buttons button svg{
+    fill: white;
   }
   .main-menu li a .letter.clone,
   .header .header-info .theme-wrap .lang,
@@ -2211,15 +2309,22 @@ body.light-theme {
   .technologies .techSwiper .swiper-slide .slides .info{
     background: #0B0918;
   }
-  .clients_marquee,
-  .header.scrolled{
+  .clients_marquee
+  {
     background: white;
+  }
+  .header.scrolled{
+    background: rgba(white, .7);
+    backdrop-filter: blur(10px);
   }
   .button-hover .button_su_inner{
     background:  linear-gradient(107deg, #87B3F4 -3.61%, #4FE5B4 99.64%);
   }
   .our-cases{
     background: rgba(11, 9, 24, 0.03);
+  }
+  .technologies .slider-buttons button{
+    background: #201A4E;
   }
   .our-cases .cases-items .cases-item,
   .technologies,
@@ -2320,6 +2425,14 @@ body.light-theme {
   .footer .contact-line{
     border-color: #FAFAFA;
   }
+  .home-top-info .bg{
+    background: #F8F8F8;
+  }
+  .home-top-info .info .text-wrap .title-style,
+  .home-top-info .info .text-wrap .texts > span{
+    color: #0B0918;
+  }
+
   @media (max-width: 1200px) {
     .header .header-info .menu-wrap{
       background: #FAFAFA;
@@ -2334,5 +2447,8 @@ body.light-theme {
       background: #FAFAFA;
     }
    }
+   .clients_marquee{
+    background: white;
+  }
 }
 
