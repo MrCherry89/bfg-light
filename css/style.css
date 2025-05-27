@@ -2,7 +2,7 @@
 body,
 html {
   overflow-x: hidden;
-  font-family: "Helvetica";
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 body.overflow,
 html.overflow {
@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: #0B0918;
-  font-family: "Helvetica";
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 main {
@@ -608,6 +608,7 @@ a:focus {
   color: #fff;
   position: relative;
   z-index: 0;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 .title-style:after {
   content: "";
@@ -1746,10 +1747,10 @@ a:focus {
 @media (max-width: 1200px) {
   .header .header-info .menu-wrap {
     position: absolute;
-    top: 70px;
+    top: 67px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 67px);
     overflow-y: auto;
     z-index: 100;
     padding: 40px 20px;
@@ -2076,13 +2077,31 @@ a:focus {
   border: 2px solid #fff;
   padding: 3px;
   cursor: pointer;
+  position: relative;
+}
+.header .header-info .theme-wrap .theme-btn .icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 4px;
+  background: #000;
+  z-index: -1;
 }
 .header .header-info .theme-wrap .theme-btn .circle {
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   background: white;
   margin-right: 8px;
+  transition: 0.3s;
+  z-index: 1;
+  position: relative;
+}
+.header .header-info .theme-wrap .theme-btn .circle.translate {
+  transform: translateX(25px);
 }
 .header .header-info .theme-wrap .theme-btn svg {
   fill: white;
@@ -2789,9 +2808,6 @@ body.light-theme .home-top-info .bg,
 body.light-theme .technologies .techSwiper .swiper-slide .slides .info {
   background: #0B0918;
 }
-body.light-theme .clients_marquee {
-  background: white;
-}
 body.light-theme .header.scrolled {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
@@ -2909,6 +2925,16 @@ body.light-theme .home-top-info .bg {
 body.light-theme .home-top-info .info .text-wrap .title-style,
 body.light-theme .home-top-info .info .text-wrap .texts > span {
   color: #0B0918;
+}
+body.light-theme .home-top-info .bg {
+  background: #0B0918;
+}
+body.light-theme .home-top-info .info .text-wrap .title-style,
+body.light-theme .home-top-info .info .text-wrap .texts > span {
+  color: white;
+}
+body.light-theme .marquee-content img {
+  filter: grayscale(100%) contrast(0%);
 }
 @media (max-width: 1200px) {
   body.light-theme .header .header-info .menu-wrap {

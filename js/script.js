@@ -363,6 +363,14 @@ document.querySelector('.theme-btn').addEventListener('click', () => {
   document.body.classList.toggle('light-theme');
 });
 
+document.querySelectorAll('.theme-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    this.querySelector('.circle').classList.toggle('translate');
+  });
+});
+
+
+
 
 
 
