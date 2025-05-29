@@ -36,12 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.cases-item');
   
     items.forEach(item => {
+      const moreBtn = item.querySelector('.more'); // кнопка внутри item
+  
       item.addEventListener('mouseenter', () => {
         items.forEach(el => {
           if (el !== item) {
             el.classList.add('opacity');
           } else {
             el.classList.add('zoom-img');
+            if (moreBtn) {
+              moreBtn.classList.add('active'); // добавляем класс
+            }
           }
         });
       });
@@ -49,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
       item.addEventListener('mouseleave', () => {
         items.forEach(el => {
           el.classList.remove('opacity', 'zoom-img');
+          const btn = el.querySelector('.more');
+          if (btn) {
+            btn.classList.remove('active'); // убираем класс
+          }
         });
       });
     });
@@ -282,7 +291,7 @@ gsap.registerPlugin(ScrollTrigger);
 const isMobile = window.innerWidth < 768; // или другой breakpoint
 
 gsap.to(".move-left", {
-  x: isMobile ? -10 : -100, // меньше на мобилках
+  x: isMobile ? -10 : -150, // меньше на мобилках
   ease: "none",
   scrollTrigger: {
     trigger: ".home-top-info",
@@ -293,7 +302,7 @@ gsap.to(".move-left", {
 });
 
 gsap.to(".move-right", {
-  x: isMobile ? 40 : 100, // меньше на мобилках
+  x: isMobile ? 40 : 150, // меньше на мобилках
   ease: "none",
   scrollTrigger: {
     trigger: ".home-top-info",
@@ -304,7 +313,7 @@ gsap.to(".move-right", {
 });
 
 gsap.to(".move-left-slow", {
-  x: isMobile ? -30 : -80, // меньше на мобилках
+  x: isMobile ? -30 : -180, // меньше на мобилках
   ease: "none",
   scrollTrigger: {
     trigger: ".home-top-info",
