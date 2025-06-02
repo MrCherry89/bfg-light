@@ -271,6 +271,8 @@ document.querySelectorAll('.main-menu li a').forEach(link => {
   });
 });
 
+
+
 const header = document.querySelector('.header');
 
 let lastScrollTop = 0;
