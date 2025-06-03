@@ -65,21 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener("DOMContentLoaded", () => {
     const marquee = document.getElementById("marquee");
+  
+    // Если элемента нет — выходим, ничего не делаем
+    if (!marquee) return;
+  
     let offset = 0;
-
+  
     const startMarquee = () => {
       setInterval(() => {
         offset -= 1;
         marquee.style.transform = `translateX(${offset}px)`;
-
+  
         // Чтобы бесконечно крутилось — сбрасываем, если дошли до конца
         if (Math.abs(offset) >= marquee.scrollWidth / 2) {
           offset = 0;
         }
       }, 16); // примерно 60 FPS
     };
-
-    // Задержка старта (2000 мс = 2 секунды)
+  
+    // Задержка старта (200мс)
     setTimeout(startMarquee, 200);
   });
 
@@ -126,28 +130,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+const grayStar = 'img/star-gray.svg';
+const greenStar = 'img/star-gray2.svg';
+
+document.querySelectorAll('.star-rating').forEach(ratingBlock => {
+  const stars = ratingBlock.querySelectorAll('.star');
+  let currentRating = 0;
+
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      currentRating = index + 1;
+
+      stars.forEach((s, i) => {
+        s.src = i < currentRating ? greenStar : grayStar;
+      });
+
+      // если нужно — можно сохранить рейтинг:
+      ratingBlock.dataset.rating = currentRating;
+    });
+  });
+});
   
-// document.querySelectorAll('.discuss-btn2').forEach(button => {
-//   button.addEventListener('mousemove', e => {
-//     const rect = button.getBoundingClientRect();
-//     const centerX = rect.left + rect.width / 3;
-//     const centerY = rect.top + rect.height / 3;
 
-//     const offsetX = (e.clientX - centerX) / (rect.width / 3);  // от -1 до 1
-//     const offsetY = (e.clientY - centerY) / (rect.height / 3);
-
-//     // Ограничим движение до 10px
-//     const maxOffset = 10;
-//     const translateX = offsetX * maxOffset;
-//     const translateY = offsetY * maxOffset;
-
-//     button.style.transform = `translate(${translateX}px, ${translateY}px)`;
-//   });
-
-//   button.addEventListener('mouseleave', () => {
-//     button.style.transform = 'translate(0, 0)';
-//   });
-// });
 
 /* Анимация заливки кнопок */
 const btn_circle = document.querySelectorAll('.btn-custom');
