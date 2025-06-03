@@ -574,11 +574,13 @@ a {
     width: 100%;
     font-size: 20px;
     color: white;
+    padding-top: 10px;
     @media (max-width: 1400px) {
       max-width: 450px;
      }
      @media (max-width: 1024px) {
      font-size: 16px;
+     padding-top: 0;
      }
   }
 }
@@ -755,7 +757,6 @@ a {
     }
     p{
       max-width: 700px;
-      margin-top: 10px;
       @media (max-width: 1400px) {
         max-width: 500px;
         }
@@ -1070,9 +1071,20 @@ background: #171624;
     position: absolute;
     bottom: 30px;
     right: 30px;
-    transition: .3s;
+    transition: .5s;
     z-index: 10;
-    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    &:after{
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: white;
+      position: absolute;
+      bottom: 0;
+      transform: scale(0);
+      left: 0;
+      transition: .3s;
+    }
     @media (max-width: 1200px) {
       font-size: 18px;
       }
@@ -1171,17 +1183,26 @@ background: #171624;
 
 .more.active {
   opacity: 1;
-  transform: scale(1.04);
 }
 
 .cases-item.zoom-img .img-wrap {
   transform: scale(1.08);
-  filter: grayscale(100%);
+}
+
+.cases-item.zoom-img  {
+  .more{
+    &:after{
+      transform: scale(1);
+    }
+  }
 }
 
 
 .cases-item.opacity {
-  opacity: 0.4;
+  opacity: 0.6;
+  .img-wrap {
+    filter: grayscale(100%);
+  }
 }
 
 .clients_marquee {
@@ -2633,6 +2654,14 @@ body.light-theme {
   .marquee-content{
     img{
       filter: grayscale(100%) contrast(0%);
+    }
+  }
+
+  .cases-item.zoom-img  {
+    .more{
+      &:after{
+        background: #000;
+      }
     }
   }
 
