@@ -375,6 +375,48 @@ const swiper = new Swiper('.techSwiper', {
   },
 });
 
+const swiper5 = new Swiper('.teamSwiper', {
+  speed: 1000,
+  slidesPerView: 'auto',
+  spaceBetween: "20px", // Убираем отступы между слайдами
+  navigation: {
+    nextEl: '.about-wrap .slider-btn.next',
+    prevEl: '.about-wrap .slider-btn.prev',
+  },
+});
+
+const swiper6 = new Swiper('.recommendationsSwiper', {
+  speed: 1000,
+  slidesPerView: 'auto',
+  spaceBetween: 20,
+  navigation: {
+    nextEl: '.recommendations .slider-btn.next',
+    prevEl: '.recommendations .slider-btn.prev',
+  },
+});
+
+const swiper7 = new Swiper('.certificatesSwiper', {
+  speed: 1000,
+  slidesPerView: 4, // по умолчанию — 4 слайда
+  spaceBetween: 20,
+  navigation: {
+    nextEl: '.recommendations .slider-btn.next',
+    prevEl: '.recommendations .slider-btn.prev',
+  },
+  breakpoints: {
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 'auto', // включается scroll
+    },
+    0: {
+      slidesPerView: 'auto', // на самых маленьких
+    }
+  }
+});
+
 document.querySelector('.theme-btn').addEventListener('click', () => {
   document.body.classList.toggle('light-theme');
 });
