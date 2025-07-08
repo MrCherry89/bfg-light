@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.cases-item');
   
     items.forEach(item => {
@@ -61,31 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
-  });
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const marquee = document.getElementById("marquee");
-  
-    // Если элемента нет — выходим, ничего не делаем
-    if (!marquee) return;
-  
-    let offset = 0;
-  
-    const startMarquee = () => {
-      setInterval(() => {
-        offset -= 1;
-        marquee.style.transform = `translateX(${offset}px)`;
-  
-        // Чтобы бесконечно крутилось — сбрасываем, если дошли до конца
-        if (Math.abs(offset) >= marquee.scrollWidth / 2) {
-          offset = 0;
-        }
-      }, 16); // примерно 60 FPS
-    };
-  
-    // Задержка старта (200мс)
-    setTimeout(startMarquee, 200);
-  });
+    document.addEventListener('DOMContentLoaded', () => {
+      const marquee = document.getElementById("marquee");
+    
+      if (!marquee) return; // ✅ теперь return внутри функции
+    
+      let offset = 0;
+    
+      const startMarquee = () => {
+        setInterval(() => {
+          offset -= 1;
+          marquee.style.transform = `translateX(${offset}px)`;
+    
+          if (Math.abs(offset) >= marquee.scrollWidth / 2) {
+            offset = 0;
+          }
+        }, 16);
+      };
+    
+      setTimeout(startMarquee, 200);
+    });
 
   const dropMenu = document.querySelector(".drop-menu");
   const headerMenuWrap = document.querySelector(".menu-wrap");
@@ -332,38 +327,54 @@ gsap.to(".move-left-slow", {
 
 
 const btn = document.querySelector('.discuss-btn');
-let targetX = 0, targetY = 0;
-let currentX = 0, currentY = 0;
-let rafId;
 
-const animate = () => {
-  currentX += (targetX - currentX) * 0.1;
-  currentY += (targetY - currentY) * 0.1;
+if (btn) {
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  let rafId;
 
-  btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
-  rafId = requestAnimationFrame(animate);
-};
+  const animate = () => {
+    currentX += (targetX - currentX) * 0.1;
+    currentY += (targetY - currentY) * 0.1;
 
-btn.addEventListener('mouseenter', () => {
-  cancelAnimationFrame(rafId);
-  animate();
-});
+    btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    rafId = requestAnimationFrame(animate);
+  };
 
-btn.addEventListener('mousemove', (e) => {
-  const rect = btn.getBoundingClientRect();
-  const x = e.clientX - rect.left - rect.width / 2;
-  const y = e.clientY - rect.top - rect.height / 2;
+  btn.addEventListener('mouseenter', () => {
+    cancelAnimationFrame(rafId);
+    animate();
+  });
 
-  targetX = x * 0.1;
-  targetY = y * 0.1;
-});
+  btn.addEventListener('mouseleave', () => {
+    cancelAnimationFrame(rafId);
+    targetX = 0;
+    targetY = 0;
+  });
 
-btn.addEventListener('mouseleave', () => {
-  targetX = 0;
-  targetY = 0;
-  cancelAnimationFrame(rafId);
-  animate();
-});
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    targetX = (e.clientX - rect.left - rect.width / 2) * 0.3;
+    targetY = (e.clientY - rect.top - rect.height / 2) * 0.3;
+  });
+}
+
+
+// btn.addEventListener('mousemove', (e) => {
+//   const rect = btn.getBoundingClientRect();
+//   const x = e.clientX - rect.left - rect.width / 2;
+//   const y = e.clientY - rect.top - rect.height / 2;
+
+//   targetX = x * 0.1;
+//   targetY = y * 0.1;
+// });
+
+// btn.addEventListener('mouseleave', () => {
+//   targetX = 0;
+//   targetY = 0;
+//   cancelAnimationFrame(rafId);
+//   animate();
+// });
 
 const swiper = new Swiper('.techSwiper', {
   speed: 1000,
@@ -374,6 +385,30 @@ const swiper = new Swiper('.techSwiper', {
     prevEl: '.slider-btn.prev',
   },
 });
+
+const swiper11 = new Swiper('.videoSwiper', {
+  speed: 1000,
+  slidesPerView: 'auto',
+  spaceBetween: "40px", 
+  navigation: {
+    nextEl: '.promo-video .slider-btn.next',
+    prevEl: '.promo-video .slider-btn.prev',
+  },
+  breakpoints: {
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 'auto', // включается scroll
+    },
+    0: {
+      spaceBetween: "10px", 
+    }
+  }
+});
+
+
 
 const swiper5 = new Swiper('.teamSwiper', {
   speed: 1000,
@@ -393,6 +428,12 @@ const swiper6 = new Swiper('.recommendationsSwiper', {
     nextEl: '.recommendations .slider-btn.next',
     prevEl: '.recommendations .slider-btn.prev',
   },
+});
+
+const swiper16 = new Swiper('.clientsSwiper', {
+  speed: 1000,
+  slidesPerView: 'auto',
+  spaceBetween: 10,
 });
 
 const swiper7 = new Swiper('.certificatesSwiper', {
@@ -426,6 +467,7 @@ document.querySelectorAll('.theme-btn').forEach(function(btn) {
     this.querySelector('.circle').classList.toggle('translate');
   });
 });
+
 
 
 
