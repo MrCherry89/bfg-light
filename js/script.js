@@ -271,7 +271,59 @@ document.querySelectorAll('.main-menu li a').forEach(link => {
   });
 });
 
+const scrollBtn = document.querySelector('.top-scroll');
 
+if (scrollBtn) {
+  // Показ/скрытие кнопки при скролле
+  window.addEventListener('scroll', function () {
+    const scroll = window.scrollY;
+
+    if (scroll >= 200) {
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+
+  // Плавный скролл вверх при клике
+  scrollBtn.addEventListener('click', function () {
+    const start = window.scrollY;
+    const duration = 1000;
+    const startTime = performance.now();
+
+    function scrollUp(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start * (1 - easeInOutQuad(progress)));
+
+      if (progress < 1) {
+        requestAnimationFrame(scrollUp);
+      }
+    }
+
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    requestAnimationFrame(scrollUp);
+  });
+}
+
+document.querySelectorAll('.fancy-link').forEach(link => {
+  const text = link.dataset.text;
+  link.innerHTML = `
+    <span class="text-top">${text}</span>
+    <span class="text-bottom">${text}</span>
+  `;
+
+  link.addEventListener('mouseenter', () => {
+    link.classList.add('animate');
+  });
+
+  link.addEventListener('mouseleave', () => {
+    link.classList.remove('animate');
+  });
+});
 
 const header = document.querySelector('.header');
 

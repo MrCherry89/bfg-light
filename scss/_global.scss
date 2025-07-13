@@ -18,7 +18,6 @@ body {
 }
 
 
-
 main{
   padding-top: 70px;
 }
@@ -28,6 +27,7 @@ main{
   margin: 0;
   padding: 0;
   color: #0B0918;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 input,
@@ -168,9 +168,46 @@ a {
   z-index: 2;
 }
 
+.fancy-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: black;
+  text-decoration: none;
+}
+
+.fancy-link span {
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+.fancy-link .text-top {
+  transform: translateY(0%);
+}
+
+.fancy-link .text-bottom {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateY(0%);
+  opacity: 0;
+}
+
+.fancy-link.animate .text-top {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.fancy-link.animate .text-bottom {
+  transform: translateY(-100%);
+  opacity: 1;
+}
+
 .footer{
   padding: 60px 0 30px;
   background: $green;
+  
   @media (max-width: 767px) {
     padding: 20px 0 60px;
    }
@@ -259,6 +296,9 @@ a {
           fill: #0B0918;
           min-width: 18px;
         }
+        span{
+          
+        }
       }
     }
   }
@@ -274,6 +314,9 @@ a {
        @media (max-width: 767px) {
         font-size: 14px;
        }
+    }
+    a{
+
     }
     .copyright{
       @media (max-width: 767px) {
@@ -467,10 +510,10 @@ a {
         content: "";
         background: #171624;
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: -1%;
+        left: -1%;
+        width: 102%;
+        height: 102%;
         z-index: -1;
         transition: .3s;
       }
@@ -644,6 +687,14 @@ a {
    }
    @media (max-width: 767px) {
     padding: 60px 0;
+   }
+   .title-wrap{
+    margin: 0 auto 100px;
+    max-width: 1520px;
+    width: 100%;
+    @media (max-width: 1024px) {
+      margin-bottom: 50px;
+     }
    }
   .accordion{
     max-width: 1300px;
@@ -845,11 +896,9 @@ a {
    }
    .title-wrap{
     text-align: left;
-    margin-bottom: 100px;
-    padding-left: 200px;
-    @media (max-width: 1700px) {
-      padding-left: 0;
-      }
+    margin: 0 auto 100px;
+    max-width: 1520px;
+    width: 100%;
     @media (max-width: 1024px) {
       margin-bottom: 50px;
       }
@@ -1202,12 +1251,11 @@ background: #171624;
     padding-bottom: 3px;
     &:after{
       content: "";
-      width: 100%;
+      width: 0;
       height: 1px;
       background: white;
       position: absolute;
       bottom: 0;
-      transform: scale(0);
       left: 0;
       transition: .3s;
     }
@@ -1279,7 +1327,7 @@ background: #171624;
   left: 0;
   top: 0;
   display: inline-block;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   pointer-events: none;
 }
 
@@ -1318,7 +1366,7 @@ background: #171624;
 .cases-item.zoom-img  {
   .more{
     &:after{
-      transform: scale(1);
+      width: 100%;
     }
   }
 }
@@ -2190,11 +2238,17 @@ z-index: 0;
   padding-left: 100px;
   @media(max-width: 1200px) {
     padding: 30px 0 20px;
+    margin: 0 20px;
 }
 @media (max-width: 767px) {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none; 
+ }
+ .wrapper{
+  @media(max-width: 1200px) {
+    padding: 0;
+}
  }
   .breadcrumbs-menu{
     @include flex;
@@ -2648,7 +2702,7 @@ z-index: 0;
      }
     .swiper-slide{
       overflow-x: auto;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
       .slider-info{
         overflow-x: auto;
         margin: 0 -5px;
@@ -3081,6 +3135,9 @@ z-index: 0;
           @media (max-width: 1024px) {
            font-size: 24px;
            }
+          @media (max-width: 767px) {
+           font-size: 20px;
+           }
         }
         b{
           display: block;
@@ -3315,12 +3372,15 @@ z-index: 0;
   border-radius: 15px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
   .img-wrap{
     @include flex;
+    overflow: hidden;
     img{
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: .5s;
     }
   }
   .texts{
@@ -3436,12 +3496,16 @@ z-index: 0;
             }
         }
         &:hover{
-          border-color: transparent;
           svg{
             transform: translateX(-10px);
           }
         }
       }
+    }
+  }
+  &:hover{
+    .img-wrap img{
+      transform: scale(1.03)
     }
   }
 }
@@ -3451,6 +3515,7 @@ z-index: 0;
   @include align-center;
   padding: 20px;
   border-radius: 30px;
+  cursor: pointer;
   background: rgba(255, 255, 255, 0.05);
   @media (max-width: 1024px) {
     @include dir-col;
@@ -3477,6 +3542,7 @@ z-index: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: .5s;
     }
   }
   .texts{
@@ -3597,6 +3663,13 @@ z-index: 0;
             transform: translateX(-10px);
           }
         }
+      }
+    }
+  }
+  &:hover{
+    .img-wrap{
+      img{
+        transform: scale(1.03);
       }
     }
   }
@@ -3758,8 +3831,16 @@ z-index: 0;
   }
 }
 
+.img-popup-content{
+  max-width: 650px !important;
+  width: 100%;
+  margin: 0 auto;
+  img{
+    width: 100%;
+  }
+}
+
 .teamSwiper{
-  width: calc(100% + 50px);
   overflow: visible;
   .swiper-slide{
     width: 520px;
@@ -3785,11 +3866,10 @@ z-index: 0;
           position: absolute;
           top: 0;
           left: 0;
-          z-index: 1;
+          z-index: -1;
           width: 100%;
           height: 100%;
-          transition: .3s;
-          transform: scale(0);
+          transition: .1s;
           opacity: 0.5;
           background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
         }
@@ -3799,7 +3879,7 @@ z-index: 0;
         }
         &:hover{
           &:after{
-            transform: scale(1);
+            z-index: 2;
           }
           img{
             transform: scale(1.03);
@@ -4101,11 +4181,10 @@ z-index: 0;
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: -1;
         width: 100%;
         height: 100%;
-        transition: .3s;
-        transform: scale(0);
+        transition: .1s;
         opacity: 0.5;
         background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
       }
@@ -4115,7 +4194,7 @@ z-index: 0;
       }
       &:hover{
         &:after{
-          transform: scale(1);
+          z-index: 2;
         }
         img{
           transform: scale(1.03);
@@ -4180,9 +4259,6 @@ z-index: 0;
    padding: 40px 0;
    }
   .certificatesSwiper{
-    @media (max-width: 1024px) {
-      width: calc(100% + 20px);
-     }
     .swiper-slide{
       @media (max-width: 1024px) {
         width: 280px;
@@ -4198,11 +4274,10 @@ z-index: 0;
           position: absolute;
           top: 0;
           left: 0;
-          z-index: 1;
+          z-index: -1;
           width: 100%;
           height: 100%;
-          transition: .3s;
-          transform: scale(0);
+          transition: .1s;
           opacity: 0.5;
           background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
         }
@@ -4212,7 +4287,7 @@ z-index: 0;
         }
         &:hover{
           &:after{
-            transform: scale(1);
+            z-index: 2;
           }
           img{
             transform: scale(1.03);
@@ -4410,6 +4485,9 @@ z-index: 0;
   @media (max-width: 1024px) {
     margin: 50px 9px;
      }
+     &.no-m{
+      margin: 50px 0;
+     }
   .title-wrap{
     max-width: 1420px;
     width: 100%;
@@ -4448,10 +4526,14 @@ z-index: 0;
   @media (max-width: 767px) {
     padding-bottom: 10px;
      }
+     .wrapper{
+      padding: 0;
+     }
   h2{
     font-size: 150px;
     margin-bottom: 60px;
     font-weight: normal;
+    padding: 0 20px;
     color: #9CFE00;
     @include flex;
     align-items: flex-start;
@@ -4475,6 +4557,7 @@ z-index: 0;
     width: 100%;
     margin-left: auto;
     margin-bottom: 100px;
+    padding: 0 20px;
     @media (max-width: 1400px) {
       margin-bottom: 60px;
        }
@@ -4533,6 +4616,7 @@ z-index: 0;
        margin: 50px auto;
        font-size: 20px;
        line-height: 130%;
+       padding: 0 20px;
          }
          @media (max-width: 767px) {
           margin: 30px auto;
@@ -4633,9 +4717,7 @@ z-index: 0;
     @media (max-width: 1024px) {
       padding: 50px 0;
       grid-template-columns: 1fr;
-       }
-    @media (max-width: 1024px) {
-      padding-bottom: 10px;
+      padding: 50px 20px 10px;
        }
     span{
       font-size: 24px;
@@ -5240,9 +5322,73 @@ iframe {
   }
 }
 
+.top-scroll {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  text-align: center;
+  opacity: 0;
+  transition: 0.3s;
+  .icon {
+    border-radius: 50%;
+    transition: 0.3s;
+    width: 60px;
+    height: 60px;
+    @include flex;
+    border:  1px solid #00D1D8;
+    margin: 0 auto 8px;
+    @media (max-width: 1024px) {
+      width: 34px;
+      height: 34px;
+      svg{
+        width: 16px;
+      }
+       }
+    svg {
+      margin: auto;
+      transition: 0.3s;
+      fill: #fff;
+    }
+  }
+  &:hover {
+    .icon {
+      background: #00D1D8;
+      svg {
+        fill: white;
+      }
+    }
+  }
+  &.show {
+    opacity: 1;
+  }
+}
+
 body.light-theme {
   background-color: #fff;
   color: #0B0918;
+  .case-item .texts .bottom-info .more span{
+    border-color: #000;
+  }
+  .top-scroll {
+    .icon {
+      border:  1px solid #000;
+      svg {
+        fill: #000;
+      }
+    }
+    &:hover {
+      .icon {
+        background: #000;
+        svg {
+          fill: white;
+        }
+      }
+    }
+    &.show {
+      opacity: 1;
+    }
+  }
   .home-banner{
     background: white;
     &:after{
@@ -5770,6 +5916,9 @@ body.light-theme {
   .home-top-info .info .text-wrap .title-style{
     color: white;
   }
+  .bottom-info a span, .contact-line a span{
+    color: #fff;
+  }
   .footer,
   .drop-menu .line{
     background: #0B0918;
@@ -5820,8 +5969,27 @@ body.light-theme {
       }
     }
   }
+  .breadcrumbs-menu li a:hover{
+    color: #000;
+  }
+  .breadcrumbs-menu li a:hover svg{
+    fill: #000;
+  }
   .text-style{
     border-color: rgba(11, 9, 24, 0.15);
+  }
+  .swiper2 .slider-info .line .info{
+    background: #000;
+    p, h3, h3 span{
+      color: white;
+    }
+  }
+  .swiper2 .slider-info .line.style2 .info{
+    background: white;
+    border-color: #000 !important;
+    p, h3, h3 span{
+      color: black !important;
+    }
   }
 
 
