@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BIG FISH</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5/dist/jquery.fancybox.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -38,7 +39,7 @@
               <li><a href="#">Блог</a></li>
               <li><a href="#">Контакты</a></li>
             </ul>
-            <a href="#" class="discuss-btn">
+            <a href="#my-popup" data-fancybox class="discuss-btn">
              <span> Обсудить проект</span>
               <img src="img/white-arr-top-right.svg" alt="" class="white-arr">
             </a>
@@ -100,7 +101,7 @@
                 </svg>
             </a>
           </div>
-          <a href="#" class="discuss-btn hover-effect">
+          <a href="#my-popup" data-fancybox class="discuss-btn hover-effect">
             <img src="img/right-arrow-big-grey.svg" alt="" class="hide-arr">
             <span>Обсудить проект</span>
             <img src="img/right-arrow-big.svg" alt="" class="white-arr">
@@ -741,30 +742,38 @@
           <div class="social">
             <h4>Социальные сети:</h4>
             <div class="soc-links">
-              <a href="#">
+              <div class="soc-item">
                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
                 </svg>
-                Telegram
-              </a>
-              <a href="#">
+                <a href="#" class="fancy-link" data-text="Telegram">
+                  Telegram
+                </a>
+              </div>
+              <div class="soc-item">
                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
                 </svg>
+              <a href="#" class="fancy-link" data-text="Whatsapp">
                 Whatsapp
               </a>
-              <a href="#">
-                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
-                </svg>
+            </div>
+            <div class="soc-item">
+            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
+            </svg>
+              <a href="#" class="fancy-link" data-text="Youtube">
                 Youtube
               </a>
-              <a href="#">
-                <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
-                </svg>
+            </div>
+            <div class="soc-item">
+              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.246609 9.52908e-05L0.241869 2.89912L13.1316 2.91062L0.0819839 15.9603L2.13176 18.0101L15.1814 4.96039L15.1929 17.8502L18.0919 17.8454L18.0774 0.0146046L0.246609 9.52908e-05Z"/>
+              </svg>
+              <a href="#" class="fancy-link" data-text="VK">
                 VK
               </a>
+            </div>
             </div>
           </div>
           <div class="bottom-info">
@@ -776,7 +785,97 @@
       </div>
     </footer>
   </main>
-  
+
+  <div style="display: none;" id="my-popup">
+    <button id="popup-close-btn">
+      <img src="img/close-popup.svg" alt="">
+    </button>
+    <div class="info">
+      <h2>Опишите ваш проект</h2>
+      <form class="form">
+        <div class="inputs">
+          <input type="text" placeholder="Имя*">
+        <input type="tel" placeholder="Телефон*">
+        </div>
+        <div class="inputs">
+          <input type="email" placeholder="E-mail*">
+        <input type="text" placeholder="Компания">
+        </div>
+        <div class="radio-wrapper">
+          <div class="top-radio-info"><span class="selected-text">Планируемый бюджет</span> <img src="img/select-arr-down.svg" alt=""></div>
+          <div class="radio-style">
+            <div class="radio-wrap">
+              <input type="radio" id="radio1" name="checkbox2" checked />
+              <label for="radio1">
+                <span></span>
+                До 300 000р.
+              </label>
+            </div>
+            <div class="radio-wrap">
+              <input type="radio" id="radio2" name="checkbox2" />
+              <label for="radio2">
+                <span></span>
+                300 000 - 500 000р.
+              </label>
+            </div>
+            <div class="radio-wrap">
+              <input type="radio" id="radio3" name="checkbox2"  />
+              <label for="radio3">
+                <span></span>
+                500 000 - 800 000р.
+              </label>
+            </div>
+            <div class="radio-wrap">
+              <input type="radio" id="radio4" name="checkbox2"  />
+              <label for="radio4">
+                <span></span>
+                800 000 - 1 500 000р.
+              </label>
+            </div>
+            <div class="radio-wrap">
+              <input type="radio" id="radio5" name="checkbox2"  />
+              <label for="radio5">
+                <span></span>
+                больше 1 500 000р.
+              </label>
+            </div>
+          </div>
+        </div>
+        <textarea placeholder="Описание проекта*"></textarea>
+        <div class="checkboxes">
+          <div class="checkbox-wrap">
+            <label>
+              <input type="checkbox" />
+              <span> </span>
+              Беспроцентная рассрочка от банка Тинькофф
+            </label>
+          </div>
+          <div class="checkbox-wrap">
+            <label>
+              <input type="checkbox" checked/>
+              <span> </span>
+              <p>
+                Я согласен с <a href="#">политикой конфеденциальности</a>
+              </p>
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button class="magnetic-button">
+      <span class="fill"></span>
+      <span class="text" data-magnetic-text>Обсудить проект</span>
+      <svg width="97" height="102" viewBox="0 0 97 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_1041_19603)">
+          <path d="M46.0829 0L37.7843 8.27154L74.589 45.142H0V56.858H74.589L37.7843 93.7285L46.0829 102L97 51L46.0829 0Z" />
+        </g>
+      </svg>
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/dist/jquery.ripples.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
