@@ -246,6 +246,15 @@ if (magnets.length > 0 && window.innerWidth > 1025) {
 }
 
 
+document.querySelectorAll('.cost-website .items .item').forEach(item => {
+  ScrollTrigger.create({
+    trigger: item,
+    start: 'top 50%',
+    toggleClass: { targets: item, className: 'active' },
+    once: true
+  });
+});
+
 
 
 document.querySelectorAll('.main-menu li a').forEach(link => {
@@ -263,7 +272,7 @@ document.querySelectorAll('.main-menu li a').forEach(link => {
     const clone = document.createElement('span');
     clone.className = 'letter clone';
     clone.textContent = char;
-    clone.style.transitionDelay = `${index * 50}ms`;
+    clone.style.transitionDelay = `${index * 20}ms`;
 
     wrap.appendChild(original);
     wrap.appendChild(clone);

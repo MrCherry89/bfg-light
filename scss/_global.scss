@@ -960,13 +960,24 @@ a {
    }
    .items{
     text-align: left;
-    border-top: 1px solid #9CFE00;
+    border-top: 1.5px solid #9CFE00;
     .item{
       padding: 30px 0;
-      border-bottom: 1px solid #9CFE00;
       @include flex;
       @include justify-between;
       gap: 10px;
+      position: relative;
+      z-index: 0;
+      &:after{
+        content: "";
+        width: 0;
+        transition: .4s;
+        height: 1.5px;
+        background: #9CFE00;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
       @media (max-width: 1024px) {
         padding: 20px 0;
         @include dir-col;
@@ -1053,6 +1064,11 @@ a {
          @media (max-width: 1024px) {
           width: 100%;
          }
+      }
+      &.active{
+        &:after{
+          width: 100%;
+        }
       }
     }
    }
@@ -2727,6 +2743,7 @@ z-index: 0;
       transition: 400ms;
       text-decoration: none;
       z-index: 100000;
+      cursor: pointer;
       @media (max-width: 767px) {
         font-size: 16px;
        }
@@ -2838,7 +2855,7 @@ z-index: 0;
 .main-menu li a .letter.original {
   position: relative;
   z-index: 1;
-  transition: .8s;
+  transition: .4s;
   color: #fff;
 }
 
@@ -3197,6 +3214,7 @@ z-index: 0;
     @include flex;
     margin-bottom: 70px;
     opacity: 0;
+    position: relative;
     @media (max-width: 767px) {
       height: 310px;
       width: calc(100% - 20px);
@@ -3397,6 +3415,10 @@ z-index: 0;
   @include flex;
   @include align-center;
   @include justify-center;
+  padding: 10px 0;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
   img{
     margin: 0 5px;
     width: 16px;
@@ -4311,11 +4333,11 @@ z-index: 0;
           position: absolute;
           top: 0;
           left: 0;
-          z-index: -1;
           width: 100%;
           height: 100%;
           transition: .3s;
           opacity: 0.5;
+          transform: scale(0);
           background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
         }
         img{
@@ -4324,7 +4346,7 @@ z-index: 0;
         }
         &:hover{
           &:after{
-            z-index: 2;
+            transform: scale(1);
           }
           img{
             transform: scale(1.03);
@@ -4653,8 +4675,9 @@ z-index: 0;
         z-index: -1;
         width: 100%;
         height: 100%;
-        transition: .1s;
+        transition: .4s;
         opacity: 0.5;
+        transform: scale(0);
         background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
       }
       img{
@@ -4663,6 +4686,7 @@ z-index: 0;
       }
       &:hover{
         &:after{
+          transform: scale(1);
           z-index: 2;
         }
         img{
@@ -4747,17 +4771,19 @@ z-index: 0;
           z-index: -1;
           width: 100%;
           height: 100%;
-          transition: .1s;
+          transition: .4s;
           opacity: 0.5;
+          transform: scale(0);
           background:  linear-gradient(107deg, #00D1D8 -3.61%, #81D100 99.64%);
         }
         img{
           width: 100%;
-          transition: .3s;
+          transition: .4s;
         }
         &:hover{
           &:after{
             z-index: 2;
+            transform: scale(1);
           }
           img{
             transform: scale(1.03);
@@ -5836,13 +5862,15 @@ iframe {
 }
 
 .top-scroll {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  position: absolute;
+  top: 100px;
+  right: 50px;
   z-index: 1000;
   text-align: center;
-  opacity: 0;
   transition: 0.3s;
+  @media (max-width: 1024px) {
+    display: none;
+     }
   .icon {
     border-radius: 50%;
     transition: 0.3s;
@@ -5882,6 +5910,10 @@ iframe {
 body.light-theme {
   background-color: #fff;
   color: #0B0918;
+  .home-banner .header-info .texts-wrapper .titles h1{
+    color: white;
+    mix-blend-mode: none;
+  }
   .services-item{
     border-color: #87B3F4;
     .right-info p{
@@ -6164,6 +6196,26 @@ color: #0B0918;
   }
   .rate-article{
     border-color: #0B0918; 
+  }
+  .star-rating{
+    background: #555353;
+  }
+  .footer .social .soc-links .soc-item svg{
+    fill: white;
+  }
+  .footer .social .soc-links .soc-item .fancy-link{
+    color: white;
+    span{
+      color: white;
+    }
+  }
+  .contacts .wrapper .icons a svg{
+    fill: white;
+    opacity: 1;
+  }
+  .contacts .wrapper .icons a{
+    background: (linear-gradient(107deg, #87B3F4 -3.61%, #4FE5B4 99.64%));
+
   }
   .text-information{
     .info1{
