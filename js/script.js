@@ -438,19 +438,35 @@ if (btn) {
 
 
 $(function() {
+  // Инициализация ripples на элементе .home-banner
   $('.home-banner').ripples({
     resolution: 512,
     dropRadius: 20,
     perturbance: 0.04,
-    interactive: false /* отключаем автоматический hover и клики */
+    interactive: false // отключаем стандартные эффекты плагина
   });
 
+  // Общая функция создания капли по координатам
+  function createDrop($el, x, y) {
+    $el.ripples('drop', x, y, 25, 0.06);
+  }
+
+  // Капли при движении мыши
   $('.home-banner').on('mousemove', function(e) {
     const $el = $(this);
     const offset = $el.offset();
     const x = e.pageX - offset.left;
     const y = e.pageY - offset.top;
-    $el.ripples('drop', x, y, 25, 0.06);
+    createDrop($el, x, y);
+  });
+
+  // Капли при клике
+  $('.home-banner').on('click', function(e) {
+    const $el = $(this);
+    const offset = $el.offset();
+    const x = e.pageX - offset.left;
+    const y = e.pageY - offset.top;
+    createDrop($el, x, y);
   });
 });
 
@@ -713,24 +729,45 @@ gsap.to(".prices-info p", {
   ease: "power3.out"  // можно изменить на любую другую
 });
 
-gsap.to(".home-banner h1", {
-  opacity: 1,
-  duration: 3,     // сколько длится сама анимация
-  delay: 1,        // задержка перед началом
-  ease: "power3.out"  // можно изменить на любую другую
-});
-gsap.to(".home-banner h4", {
-  opacity: 1,
-  duration: 3,     // сколько длится сама анимация
-  delay: 2,        // задержка перед началом
-  ease: "power3.out"  // можно изменить на любую другую
-});
-gsap.to(".home-banner .texts", {
-  opacity: 1,
-  duration: 3,     // сколько длится сама анимация
-  delay: 3,        // задержка перед началом
-  ease: "power3.out"  // можно изменить на любую другую
-});
+gsap.fromTo(".home-banner h1",
+  {
+    opacity: 0,
+    y: 100  // стартовая позиция — 100px ниже
+  },
+  {
+    opacity: 1,
+    y: 0,   // финальная позиция — на месте
+    duration: 3,
+    delay: 1,
+    ease: "power3.out"
+  }
+);
+gsap.fromTo(".home-banner h4",
+  {
+    opacity: 0,
+    y: 100  // стартовая позиция — 100px ниже
+  },
+  {
+    opacity: 1,
+    y: 0,   // финальная позиция — на месте
+    duration: 3,
+    delay: 1.5,
+    ease: "power3.out"
+  }
+);
+gsap.fromTo(".home-banner .texts",
+  {
+    opacity: 0,
+    x: 100  // стартовая позиция — 100px ниже
+  },
+  {
+    opacity: 1,
+    x: 0,   // финальная позиция — на месте
+    duration: 3,
+    delay: 1.7,
+    ease: "power3.out"
+  }
+);
 gsap.to(".contacts h2", {
   opacity: 1,
   duration: 3,     // сколько длится сама анимация

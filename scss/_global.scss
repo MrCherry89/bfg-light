@@ -1494,9 +1494,25 @@ z-index: 0;
   .wrapper{
     height: 100%;
   }
+  
+  .banner-img {
+    animation: floatY 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatY {
+    0% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(20%);
+    }
+    100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+  }
   .banner-img{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
