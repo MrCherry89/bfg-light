@@ -1767,11 +1767,25 @@ a:focus {
   }
 }
 
+.button-container {
+  transition: 0.5s;
+}
+.button-container .button-hover {
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.main-head {
+  background: #201A4E;
+  backdrop-filter: blur(10px);
+}
+
 .home-banner {
   position: relative;
   height: calc(100vh - 71px);
   background: linear-gradient(180deg, #201A4E 0%, #4A3CB4 100%);
   z-index: 0;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   .home-banner {
@@ -1875,32 +1889,16 @@ a:focus {
     font-size: 16px;
   }
 }
-.home-banner .header-info .texts-wrapper .titles h1 {
+.home-banner .header-info .texts-wrapper .titles svg {
   margin-bottom: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 130px;
-  color: white;
-  font-weight: 600;
-  line-height: 100%;
-  opacity: 0;
-  mix-blend-mode: difference;
-}
-@media (max-width: 1500px) {
-  .home-banner .header-info .texts-wrapper .titles h1 {
-    font-size: 8vw;
-  }
-}
-@media (max-width: 1200px) {
-  .home-banner .header-info .texts-wrapper .titles h1 {
-    padding-right: 20px;
-    font-size: 10vw;
-  }
-}
-.home-banner .header-info .texts-wrapper .titles h1 img {
   max-width: 100%;
   max-height: 100%;
+  mix-blend-mode: difference;
+}
+@media (max-width: 1200px) {
+  .home-banner .header-info .texts-wrapper .titles svg {
+    padding-right: 20px;
+  }
 }
 .home-banner .header-info .texts-wrapper .texts {
   display: -webkit-box;
@@ -3588,7 +3586,6 @@ a:focus {
 .header.scrolled {
   backdrop-filter: blur(10px);
   background-color: rgba(11, 9, 24, 0.5);
-  /* или любой другой фон */
 }
 
 .technologies {
@@ -5665,16 +5662,19 @@ a:focus {
 
 .partners-bank .title-style2 {
   opacity: 0;
-  transform: translateX(-100px);
+  transform: translateY(-100px);
+  transition: 0.4s;
 }
 
 .partners-bank img {
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateY(100px);
+  transition: 0.4s;
 }
 
 .partners-bank p {
   opacity: 0;
+  transition: 0.4s;
 }
 
 .partners-bank .button-hover {
@@ -6070,6 +6070,7 @@ a:focus {
   line-height: 90%;
   letter-spacing: -5px;
   opacity: 0;
+  transition: 0.4s;
   transform: translateY(100px);
 }
 @media (max-width: 1400px) {
@@ -7346,6 +7347,9 @@ body.light-theme {
 body.light-theme .home-banner .header-info .texts-wrapper .titles h1 {
   color: white;
   mix-blend-mode: none;
+}
+body.light-theme .header.main-head {
+  background: #fff;
 }
 body.light-theme .services-item {
   border-color: #87B3F4;

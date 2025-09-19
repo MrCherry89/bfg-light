@@ -438,7 +438,7 @@ if (btn) {
 
 
 $(function() {
-  // Инициализация ripples на элементе .home-banner
+  // Инициализация эффекта океанских волн на элементе .home-banner
   $('.home-banner').ripples({
     resolution: 512,
     dropRadius: 20,
@@ -446,29 +446,30 @@ $(function() {
     interactive: false // отключаем стандартные эффекты плагина
   });
 
-  // Общая функция создания капли по координатам
-  function createDrop($el, x, y) {
+  // Общая функция создания волны по координатам
+  function createOceanWave($el, x, y) {
     $el.ripples('drop', x, y, 25, 0.06);
   }
 
-  // Капли при движении мыши
+  // Волны при движении мыши
   $('.home-banner').on('mousemove', function(e) {
     const $el = $(this);
     const offset = $el.offset();
     const x = e.pageX - offset.left;
     const y = e.pageY - offset.top;
-    createDrop($el, x, y);
+    createOceanWave($el, x, y);
   });
 
-  // Капли при клике
+  // Волны при клике
   $('.home-banner').on('click', function(e) {
     const $el = $(this);
     const offset = $el.offset();
     const x = e.pageX - offset.left;
     const y = e.pageY - offset.top;
-    createDrop($el, x, y);
+    createOceanWave($el, x, y);
   });
 });
+
 
 
 
@@ -621,7 +622,8 @@ gsap.to(".sites h2", {
   scrollTrigger: {
     trigger: ".sites h2",
     start: "top 80%",
-    toggleActions: "play none none none"
+    end: "top 30%", // конец скролла — можно менять по ситуации
+    scrub: true 
   }
 });
 
@@ -636,7 +638,8 @@ gsap.utils.toArray(".sites-item").forEach((item, i) => {
     scrollTrigger: {
       trigger: ".sites-items",
       start: "top 80%",
-      toggleActions: "play none none none"
+      toggleActions: "play none none none",
+      scrub: true 
     }
   });
 });
@@ -729,20 +732,20 @@ gsap.to(".prices-info p", {
   ease: "power3.out"  // можно изменить на любую другую
 });
 
-gsap.fromTo(".home-banner h1",
+gsap.fromTo(".home-banner .titles svg",
   {
-    opacity: 0,
+    scale: 0,
     y: 100  // стартовая позиция — 100px ниже
   },
   {
-    opacity: 1,
+    scale: 1,
     y: 0,   // финальная позиция — на месте
-    duration: 3,
-    delay: 1,
+    duration: 1.5,
+    delay: .6,
     ease: "power3.out"
   }
 );
-gsap.fromTo(".home-banner h4",
+gsap.fromTo(".home-banner .titles h4",
   {
     opacity: 0,
     y: 100  // стартовая позиция — 100px ниже
@@ -750,8 +753,8 @@ gsap.fromTo(".home-banner h4",
   {
     opacity: 1,
     y: 0,   // финальная позиция — на месте
-    duration: 3,
-    delay: 1.5,
+    duration: 1,
+    delay: .6,
     ease: "power3.out"
   }
 );
@@ -763,8 +766,8 @@ gsap.fromTo(".home-banner .texts",
   {
     opacity: 1,
     x: 0,   // финальная позиция — на месте
-    duration: 3,
-    delay: 1.7,
+    duration: 1,
+    delay: .8,
     ease: "power3.out"
   }
 );
@@ -995,10 +998,10 @@ gsap.fromTo(".certificates .title-wrap",
   }
 );
 gsap.fromTo(".our-cases .title-wrap",
-  { opacity: 0, scale: 0.8 }, // начальное состояние — уменьшенный и прозрачный
+  { opacity: 0, y: 100 }, 
   {
     opacity: 1,
-    scale: 1,                  // возвращаем к нормальному размеру
+    y: 0,      
     ease: "none",
     scrollTrigger: {
       trigger: ".our-cases .title-wrap",
@@ -1010,10 +1013,10 @@ gsap.fromTo(".our-cases .title-wrap",
   }
 );
 gsap.fromTo(".technologies .title-wrap",
-  { opacity: 0, scale: 0.8 }, // начальное состояние — уменьшенный и прозрачный
+  { opacity: 0, y: 100 }, 
   {
     opacity: 1,
-    scale: 1,                  // возвращаем к нормальному размеру
+    y: 0,                  // возвращаем к нормальному размеру
     ease: "none",
     scrollTrigger: {
       trigger: ".technologies .title-wrap",
@@ -1070,10 +1073,10 @@ gsap.to(".information-block .title-style", {
 });
 
 gsap.fromTo(".partners-bank .title-style2",
-  { opacity: 0, x: -50 },
+  { opacity: 0, y: 100 },
   {
     opacity: 1,
-    x: 0,
+    y: 0,
     ease: "none",
     scrollTrigger: {
       trigger: ".partners-bank",
@@ -1086,10 +1089,10 @@ gsap.fromTo(".partners-bank .title-style2",
 
 // Логотип справа (fade + справа налево)
 gsap.fromTo(".partners-bank img",
-  { opacity: 0, x: 50 },
-  {
-    opacity: 1,
-    x: 0,
+{ opacity: 0, y: 100 },
+{
+  opacity: 1,
+  y: 0,
     ease: "none",
     scrollTrigger: {
       trigger: ".partners-bank",
@@ -1103,9 +1106,10 @@ gsap.fromTo(".partners-bank img",
 // Тексты по очереди (fade-in, плавно с прокруткой)
 gsap.utils.toArray(".partners-bank p").forEach((p, i) => {
   gsap.fromTo(p,
-    { opacity: 0 },
+    { opacity: 0, y: 100},
     {
       opacity: 1,
+      y: 0,
       ease: "none",
       scrollTrigger: {
         trigger: p,
@@ -1150,6 +1154,74 @@ gsap.utils.toArray('.cases-wrap .case-item').forEach((item) => {
       }
     }
   );
+});
+
+// const button = document.querySelector('.button-hover');
+
+// button.addEventListener('mousemove', (e) => {
+//   const rect = button.getBoundingClientRect();
+//   const offsetX = e.clientX - rect.left - rect.width / 2;
+//   const offsetY = e.clientY - rect.top - rect.height / 2;
+
+//   // Коэффициенты чувствительности (чем меньше, тем дальше "убегает")
+//   const strength = 0.3;
+
+//   button.style.transform = `translate(${offsetX * strength}px, ${offsetY * strength}px)`;
+// });
+
+// button.addEventListener('mouseleave', () => {
+//   button.style.transform = 'translate(0, 0)';
+// });
+
+
+
+const button = document.querySelector('.button-container .button-hover');
+
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
+let rafId = null;
+const strength = 20; // максимальный сдвиг в px
+
+function updateTransform() {
+  const diffX = mouseX - currentX;
+  const diffY = mouseY - currentY;
+
+  // Плавное приближение к целевому значению
+  currentX += diffX * 0.15;
+  currentY += diffY * 0.15;
+
+  // Ограничим силу магнитного эффекта
+  const clampedX = Math.max(-strength, Math.min(currentX, strength));
+  const clampedY = Math.max(-strength, Math.min(currentY, strength));
+
+  button.style.transform = `translate(${clampedX}px, ${clampedY}px) scale(1.05)`;
+
+  rafId = requestAnimationFrame(updateTransform);
+}
+
+button.addEventListener('mouseenter', (e) => {
+  const rect = button.getBoundingClientRect();
+
+  document.addEventListener('mousemove', onMouseMove);
+
+  function onMouseMove(e) {
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+    mouseX = offsetX;
+    mouseY = offsetY;
+  }
+
+  updateTransform();
+});
+
+button.addEventListener('mouseleave', () => {
+  cancelAnimationFrame(rafId);
+  document.removeEventListener('mousemove', null);
+  button.style.transform = 'translate(0px, 0px) scale(1)';
+  mouseX = 0;
+  mouseY = 0;
+  currentX = 0;
+  currentY = 0;
 });
 
 
